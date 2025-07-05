@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Kit Kitchen - Restaurant-Quality Pizza at Home</title>
+    <meta name="description" content="Order fresh pizza kits with signature herb sauce. Ready to bake at home in 15 minutes. Local pickup 4-7 PM weekdays.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #d73027 0%, #f46b45 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f4a261" width="1200" height="800"/><circle fill="%23e76f51" cx="600" cy="400" r="200"/><circle fill="%23e9c46a" cx="600" cy="400" r="150"/><circle fill="%23f4a261" cx="600" cy="400" r="100"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #2a9d8f, #264653);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-info {
+            margin-top: 2rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #264653;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #264653;
+            margin-bottom: 1rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #e76f51, #f4a261);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            color: #264653;
+            margin-bottom: 1rem;
+        }
+
+        /* Menu Preview */
+        .menu-preview {
+            background: #f8f9fa;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item-image {
+            height: 200px;
+            background: linear-gradient(45deg, #e76f51, #f4a261);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            color: #264653;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e76f51;
+            margin-top: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #264653;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #d73027;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .steps,
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .btn-secondary {
+            background: transparent;
+            color: #e76f51;
+            border: 2px solid #e76f51;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #e76f51;
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 2rem;
+        }
+
+        /* Page Navigation */
+        .page-nav {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .page-nav.active {
+            display: block;
+        }
+
+        .nav-pages {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-pages a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #264653;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-pages a:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-toggle {
+            background: #e76f51;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">🍕 Pizza Kitchen Kits</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#order">Order</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Restaurant-Quality Pizza Kits<br>Ready in 15 Minutes at Home</h1>
+            <p>Fresh ingredients, signature herb sauce, and easy instructions.<br>Perfect for busy families!</p>
+            <a href="#order" class="cta-button">Order Your Kit Now</a>
+            <a href="#menu" class="btn-secondary">View Menu</a>
+            <div class="hero-info">
+                <p>📞 24-hour advance notice required • 🕐 Pickup 4-7 PM weekdays</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Pizza Kits?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Signature Herb Sauce</h3>
+                    <p>Our secret blend of herbs and spices makes every pizza extraordinary. You can't get this flavor anywhere else!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥬</div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>Pre-portioned, restaurant-quality ingredients prepared fresh daily. No measuring, no waste, perfect every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>15-Minute Baking</h3>
+                    <p>Complete instructions included. Just assemble and bake for fresh, hot pizza faster than delivery!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Bonding</h3>
+                    <p>Let the kids help assemble their own pizzas. Create memories while solving the "what's for dinner?" problem!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Order Online</h3>
+                    <p>Choose your pizza kits and toppings 24 hours in advance. Schedule your pickup time between 4-7 PM on weekdays.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Pick Up Fresh</h3>
+                    <p>Collect your pizza kit at your scheduled time. Everything is pre-portioned and ready to go - just grab and drive!</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Bake & Enjoy</h3>
+                    <p>Follow our simple instructions to assemble and bake your pizza in just 15 minutes. Dinner is served!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview -->
+    <section id="menu" class="menu-preview">
+        <div class="container">
+            <h2 class="section-title">Our Pizza Kits</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">🍕</div>
+                    <div class="menu-item-content">
+                        <h3>Base Kit</h3>
+                        <p>Fresh dough, signature herb sauce, and premium cheddar cheese. The perfect foundation for your creation!</p>
+                        <div class="price">$12.00</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">🥕</div>
+                    <div class="menu-item-content">
+                        <h3>Veggie Add-ons</h3>
+                        <p>Fresh tomatoes, sweet peppers, or pineapple. Add color and flavor to your pizza!</p>
+                        <div class="price">+$2.00</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">🥓</div>
+                    <div class="menu-item-content">
+                        <h3>Meat Toppings</h3>
+                        <p>Turkey ham, ham, pepperoni, bacon, ground beef, or ground chicken. Premium quality meats!</p>
+                        <div class="price">+$2.50 - $3.00</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">🦐</div>
+                    <div class="menu-item-content">
+                        <h3>Seafood Special</h3>
+                        <p>Fresh shrimp or fish for a gourmet pizza experience. Catch of the day quality!</p>
+                        <div class="price">+$4.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="#order" class="cta-button">View Full Menu & Order</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>(868) 753-7204<br>Questions? We're here to help!</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>orders@pizzakitkitchen.com<br>We respond within 2 hours</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <h3>Pickup Hours</h3>
+                    <p>Monday - Friday<br>4:00 PM - 7:00 PM</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Local neighborhood service<br>Address provided after order</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Pizza Kit Kitchen. Made with ❤️ for busy families.</p>
+            <p>🍕 Restaurant-quality ingredients • 🏠 Home convenience • 👨‍👩‍👧‍👦 Family fun</p>
+        </div>
+    </footer>
+
+    <!-- Page Navigation -->
+    <div class="page-nav" id="pageNav">
+        <div class="nav-pages" id="navPages" style="display: none;">
+            <a href="#order">📝 Order Form</a>
+            <a href="#about">ℹ️ About Us</a>
+            <a href="#instructions">📋 Instructions</a>
+            <a href="#contact">📞 Contact Info</a>
+        </div>
+        <button class="nav-toggle" id="navToggle">📄</button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Page navigation
+        const navToggle = document.getElementById('navToggle');
+        const navPages = document.getElementById('navPages');
+        const pageNav = document.getElementById('pageNav');
+
+        navToggle.addEventListener('click', () => {
+            navPages.style.display = navPages.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Show page navigation when scrolling
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 1000) {
+                pageNav.classList.add('active');
+            } else {
+                pageNav.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links (REMOVED - handled above)
+
+        // Handle all page navigation links
+        document.addEventListener('click', function(e) {
+            // Handle navigation links
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const href = e.target.getAttribute('href');
+                const page = href.substring(1);
+                
+                // If it's a special page (order, about, instructions), show that page
+                if (['order', 'about', 'instructions'].includes(page)) {
+                    showPage(page);
+                    navPages.style.display = 'none';
+                } else {
+                    // Otherwise, smooth scroll to section
+                    const target = document.querySelector(href);
+                    if (target) {
+                        // Show all sections first (in case we're in a special page view)
+                        document.querySelectorAll('section').forEach(section => {
+                            section.style.display = 'block';
+                        });
+                        // Remove any page content
+                        const existingPage = document.querySelector('.page-content');
+                        if (existingPage) {
+                            existingPage.remove();
+                        }
+                        // Scroll to target
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function showPage(page) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Create and show the requested page
+            const main = document.querySelector('main') || document.body;
+            const pageContent = createPageContent(page);
+            
+            // Remove any existing page content
+            const existingPage = document.querySelector('.page-content');
+            if (existingPage) {
+                existingPage.remove();
+            }
+            
+            // Insert new page content
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'page-content';
+            pageDiv.innerHTML = pageContent;
+            pageDiv.style.paddingTop = '100px'; // Account for fixed header
+            main.insertBefore(pageDiv, main.firstChild);
+            
+            // If it's the order page, initialize the order form
+            if (page === 'order') {
+                initializeOrderForm();
+            }
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function createPageContent(page) {
+            switch(page) {
+                case 'order':
+                    return `
+                        <section class="container" style="padding: 4rem 0;">
+                            <h2 class="section-title">Order Your Pizza Kit</h2>
+                            <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                <h3>🕐 Important Ordering Information</h3>
+                                <p>• 24-hour advance notice required</p>
+                                <p>• Pickup available Monday-Friday 4-7 PM</p>
+                                <p>• Payment: Cash on pickup</p>
+                                <p>• Pickup location provided after order confirmation</p>
+                            </div>
+                            <div id="orderForm">                            </div>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <button onclick="backToHome()" class="cta-button">Back to Home</button>
+                            </div>
+                        </section>
+                    `;
+                case 'about':
+                    return `
+                        <section class="container" style="padding: 4rem 0;">
+                            <h2 class="section-title">About Pizza Kit Kitchen</h2>
+                            <div style="max-width: 800px; margin: 0 auto;">
+                                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>Our Story</h3>
+                                    <p>Pizza Kit Kitchen was born from a simple idea: busy families deserve restaurant-quality pizza without the hassle. As working parents ourselves, we understand the 5 PM panic of "what's for dinner?" Our signature herb sauce recipe has been perfected over years of family dinners, and now we're sharing it with our neighbors.</p>
+                                </div>
+                                <div style="background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                    <h3>The Secret Sauce</h3>
+                                    <p>Our signature herb sauce isn't just a recipe—it's a family tradition. Made with fresh herbs, premium tomatoes, and a secret blend of spices, it transforms ordinary pizza into something extraordinary. Each batch is prepared fresh, never frozen, never processed.</p>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>Why Pizza Kits?</h3>
+                                    <p>We believe dinner should bring families together, not stress them out. Our pizza kits solve multiple problems: they're faster than delivery, healthier than takeout, more fun than microwaved meals, and create opportunities for kids to help in the kitchen. Plus, you know exactly what's going into your food.</p>
+                                </div>
+                                <div style="background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                    <h3>Quality Promise</h3>
+                                    <p>Every ingredient is sourced locally when possible. Our dough is made fresh daily, cheese is premium grade, and all toppings are restaurant quality. We follow strict food safety protocols and maintain the highest standards because we're feeding families—just like our own.</p>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button onclick="backToHome()" class="cta-button">Back to Home</button>
+                            </div>
+                        </section>
+                    `;
+                case 'instructions':
+                    return `
+                        <section class="container" style="padding: 4rem 0;">
+                            <h2 class="section-title">Perfect Pizza Instructions</h2>
+                            <div style="max-width: 800px; margin: 0 auto;">
+                                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>🍕 Choose Your Dough Type</h3>
+                                    <p>We offer two dough options to fit your schedule:</p>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                                        <div style="background: white; padding: 1rem; border-radius: 5px; border: 2px solid #2a9d8f;">
+                                            <h4 style="color: #2a9d8f;">🕐 Raw Dough (15 mins)</h4>
+                                            <p style="font-size: 0.9rem;">Fresh dough for maximum customization</p>
+                                        </div>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px; border: 2px solid #e76f51;">
+                                            <h4 style="color: #e76f51;">⚡ Par-Baked (8 mins)</h4>
+                                            <p style="font-size: 0.9rem;">Partially baked for super quick finishing</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background: #2a9d8f; color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>🔥 Raw Dough Instructions (15 minutes)</h3>
+                                    <ol style="margin-left: 20px; line-height: 1.8;">
+                                        <li><strong>Preheat your oven to 425°F (220°C)</strong></li>
+                                        <li><strong>Prepare your surface:</strong> Lightly flour a clean surface or use parchment paper</li>
+                                        <li><strong>Roll the dough:</strong> Gently stretch or roll to your desired thickness</li>
+                                        <li><strong>Transfer to baking sheet:</strong> Use parchment paper or lightly oil your pan</li>
+                                        <li><strong>Add the sauce:</strong> Spread our signature herb sauce evenly, leaving 1-inch border</li>
+                                        <li><strong>Add cheese:</strong> Sprinkle the cheddar cheese evenly over sauce</li>
+                                        <li><strong>Add toppings:</strong> Distribute your chosen toppings evenly</li>
+                                        <li><strong>Bake:</strong> 12-15 minutes until crust is golden and cheese is bubbly</li>
+                                        <li><strong>Cool & enjoy:</strong> Let cool for 2-3 minutes before slicing</li>
+                                    </ol>
+                                </div>
+
+                                <div style="background: #e76f51; color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>⚡ Par-Baked Crust Instructions (8 minutes)</h3>
+                                    <ol style="margin-left: 20px; line-height: 1.8;">
+                                        <li><strong>Preheat your oven to 450°F (230°C)</strong> - hotter for quick finish</li>
+                                        <li><strong>No prep needed:</strong> Par-baked crust is ready to top</li>
+                                        <li><strong>Add the sauce:</strong> Spread our signature herb sauce evenly</li>
+                                        <li><strong>Add cheese:</strong> Sprinkle the cheddar cheese over sauce</li>
+                                        <li><strong>Add toppings:</strong> Distribute toppings quickly and evenly</li>
+                                        <li><strong>Bake:</strong> 6-8 minutes until cheese melts and edges are crispy</li>
+                                        <li><strong>Watch carefully:</strong> Par-baked crusts cook much faster!</li>
+                                        <li><strong>Serve immediately:</strong> Enjoy your super-quick pizza!</li>
+                                    </ol>
+                                </div>
+
+                                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                    <h3>💡 Pro Tips</h3>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                        <div>
+                                            <h4 style="color: #2a9d8f;">Raw Dough Tips:</h4>
+                                            <ul style="margin-left: 20px; line-height: 1.6;">
+                                                <li>Let dough rest 10 mins if hard to stretch</li>
+                                                <li>For crispier crust, prebake 3 mins before toppings</li>
+                                                <li>Don't overload with sauce - less is more</li>
+                                                <li>Brush crust with olive oil for golden color</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #e76f51;">Par-Baked Tips:</h4>
+                                            <ul style="margin-left: 20px; line-height: 1.6;">
+                                                <li>Higher heat = crispier finish</li>
+                                                <li>Add delicate toppings last 2 minutes</li>
+                                                <li>Perfect for busy weeknight dinners</li>
+                                                <li>Watch closely - can go from perfect to burnt quickly</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                    <h3>🔧 Troubleshooting</h3>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                        <div>
+                                            <p><strong>Soggy crust?</strong></p>
+                                            <p style="font-size: 0.9rem;">• Oven not hot enough<br>• Too much sauce<br>• Wet toppings (pat dry first)</p>
+                                        </div>
+                                        <div>
+                                            <p><strong>Burnt edges?</strong></p>
+                                            <p style="font-size: 0.9rem;">• Lower temp by 25°F<br>• Move to lower oven rack<br>• Cover edges with foil</p>
+                                        </div>
+                                        <div>
+                                            <p><strong>Uneven cooking?</strong></p>
+                                            <p style="font-size: 0.9rem;">• Rotate pizza halfway through<br>• Check oven hot spots<br>• Use pizza stone if available</p>
+                                        </div>
+                                        <div>
+                                            <p><strong>Cheese not melting?</strong></p>
+                                            <p style="font-size: 0.9rem;">• Oven too low<br>• Cheese too cold<br>• Try broiler for last minute</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background: #264653; color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
+                                    <h3>🎯 Which Dough Should You Choose?</h3>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                                        <div>
+                                            <h4>Choose Raw Dough If:</h4>
+                                            <ul style="text-align: left; margin-left: 20px;">
+                                                <li>You want maximum customization</li>
+                                                <li>You enjoy the full cooking process</li>
+                                                <li>You have 15+ minutes</li>
+                                                <li>You want the freshest possible crust</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4>Choose Par-Baked If:</h4>
+                                            <ul style="text-align: left; margin-left: 20px;">
+                                                <li>You need dinner FAST</li>
+                                                <li>You're feeding hungry kids</li>
+                                                <li>You want foolproof results</li>
+                                                <li>You're new to pizza making</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button onclick="backToHome()" class="cta-button">Back to Home</button>
+                            </div>
+                        </section>
+                    `;
+                default:
+                    return '<section class="container" style="padding: 4rem 0;"><h2>Page not found</h2></section>';
+            }
+        }
+
+        // Show home page by default
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show all sections initially
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'block';
+            });
+        });
+
+        // Order Form Logic
+        function initializeOrderForm() {
+            const orderForm = document.getElementById('orderForm');
+            if (!orderForm) return;
+
+            orderForm.innerHTML = `
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                        <h3 style="color: #264653; margin-bottom: 1.5rem;">🍕 Build Your Pizza Kits</h3>
+                        <div id="pizzaKits">
+                            <div class="pizza-kit" data-kit="1">
+                                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                                    <h4 style="color: #e76f51; margin-bottom: 1rem;">Pizza Kit #1</h4>
+                                    
+                                    <!-- Base Kit -->
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Base Kit (Required) - $12.00</label>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px;">
+                                            <p style="margin-bottom: 1rem; font-weight: bold;">Choose your dough type:</p>
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="radio" name="dough-type-1" value="raw" checked class="dough-radio" data-kit="1" style="margin-right: 0.5rem;">
+                                                <span style="flex: 1;">
+                                                    <strong>Raw Dough</strong> - Fresh dough for maximum customization (15 min bake)
+                                                </span>
+                                            </label>
+                                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                                <input type="radio" name="dough-type-1" value="par-baked" class="dough-radio" data-kit="1" style="margin-right: 0.5rem;">
+                                                <span style="flex: 1;">
+                                                    <strong>Par-Baked Crust</strong> - Partially baked for super quick finish (8 min bake)
+                                                </span>
+                                            </label>
+                                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                                                <p style="margin: 0; color: #666; font-size: 0.9rem;">
+                                                    <strong>Includes:</strong> Your chosen dough + signature herb sauce + cheddar cheese
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Vegetables -->
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Vegetables (+$2.00 each)</label>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px;">
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Fresh Tomatoes
+                                            </label>
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Sweet Peppers
+                                            </label>
+                                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Pineapple
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Regular Meats -->
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Regular Meats (+$2.50 each)</label>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px;">
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.50" data-kit="1" style="margin-right: 0.5rem;">
+                                                Turkey Ham
+                                            </label>
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.50" data-kit="1" style="margin-right: 0.5rem;">
+                                                Ham
+                                            </label>
+                                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="2.50" data-kit="1" style="margin-right: 0.5rem;">
+                                                Pepperoni
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Premium Meats -->
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Premium Meats (+$3.00 each)</label>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px;">
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="3.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Bacon
+                                            </label>
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="3.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Ground Beef
+                                            </label>
+                                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="3.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Ground Chicken
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Seafood -->
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Seafood (+$4.00 each)</label>
+                                        <div style="background: white; padding: 1rem; border-radius: 5px;">
+                                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="4.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Shrimp
+                                            </label>
+                                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                                <input type="checkbox" class="topping-checkbox" data-price="4.00" data-kit="1" style="margin-right: 0.5rem;">
+                                                Fish
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: right; padding-top: 1rem; border-top: 2px solid #e76f51;">
+                                        <span style="font-size: 1.2rem; font-weight: bold; color: #264653;">
+                                            Kit #1 Total: $<span class="kit-total" data-kit="1">12.00</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: 2rem 0;">
+                            <button id="addKitBtn" style="background: #2a9d8f; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
+                                + Add Another Pizza Kit
+                            </button>
+                        </div>
+
+                        <div style="background: #264653; color: white; padding: 1.5rem; border-radius: 8px; text-align: center; margin-bottom: 2rem;">
+                            <h3 style="margin-bottom: 0.5rem;">Order Total</h3>
+                            <div style="font-size: 2rem; font-weight: bold;">
+                                $<span id="orderTotal">12.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Information -->
+                    <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                        <h3 style="color: #264653; margin-bottom: 1.5rem;">📋 Your Information</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Name *</label>
+                                <input type="text" id="customerName" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone *</label>
+                                <input type="tel" id="customerPhone" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email *</label>
+                                <input type="email" id="customerEmail" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Pickup Date *</label>
+                                <input type="date" id="pickupDate" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Pickup Time *</label>
+                                <select id="pickupTime" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                                    <option value="">Select time</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="4:30 PM">4:30 PM</option>
+                                    <option value="5:00 PM">5:00 PM</option>
+                                    <option value="5:30 PM">5:30 PM</option>
+                                    <option value="6:00 PM">6:00 PM</option>
+                                    <option value="6:30 PM">6:30 PM</option>
+                                    <option value="7:00 PM">7:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Special Instructions (Optional)</label>
+                            <textarea id="specialInstructions" rows="3" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;" placeholder="Any special requests or notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="text-align: center;">
+                        <button id="submitOrder" style="background: linear-gradient(45deg, #e76f51, #f4a261); color: white; border: none; padding: 1.2rem 3rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                            Place Order - $<span id="submitTotal">12.00</span>
+                        </button>
+                        <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                            You'll receive confirmation and pickup location via email
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            // Set minimum date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('pickupDate').min = tomorrow.toISOString().split('T')[0];
+
+            // Add event listeners
+            setupOrderFormListeners();
+        }
+
+        function setupOrderFormListeners() {
+            let kitCounter = 1;
+
+            // Topping checkboxes
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('topping-checkbox')) {
+                    updateKitTotal(e.target.dataset.kit);
+                    updateOrderTotal();
+                }
+            });
+
+            // Add kit button
+            document.getElementById('addKitBtn').addEventListener('click', function() {
+                kitCounter++;
+                addNewKit(kitCounter);
+            });
+
+            // Submit order
+            document.getElementById('submitOrder').addEventListener('click', function(e) {
+                e.preventDefault();
+                submitOrder();
+            });
+        }
+
+        function updateKitTotal(kitNumber) {
+            const kit = document.querySelector(`[data-kit="${kitNumber}"]`);
+            const checkboxes = kit.querySelectorAll('.topping-checkbox:checked');
+            let total = 12.00; // Base price
+
+            checkboxes.forEach(checkbox => {
+                total += parseFloat(checkbox.dataset.price);
+            });
+
+            const totalElement = kit.querySelector(`.kit-total[data-kit="${kitNumber}"]`);
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        function updateOrderTotal() {
+            const kitTotals = document.querySelectorAll('.kit-total');
+            let orderTotal = 0;
+
+            kitTotals.forEach(total => {
+                orderTotal += parseFloat(total.textContent);
+            });
+
+            document.getElementById('orderTotal').textContent = orderTotal.toFixed(2);
+            document.getElementById('submitTotal').textContent = orderTotal.toFixed(2);
+        }
+
+        function addNewKit(kitNumber) {
+            const kitsContainer = document.getElementById('pizzaKits');
+            const newKit = document.querySelector('.pizza-kit').cloneNode(true);
+            
+            // Update kit number and data attributes
+            newKit.dataset.kit = kitNumber;
+            newKit.querySelector('h4').textContent = `Pizza Kit #${kitNumber}`;
+            
+            // Reset all checkboxes and update data-kit attributes
+            const checkboxes = newKit.querySelectorAll('.topping-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.dataset.kit = kitNumber;
+            });
+            
+            // Update radio button names and data-kit attributes
+            const radioButtons = newKit.querySelectorAll('.dough-radio');
+            radioButtons.forEach(radio => {
+                radio.name = `dough-type-${kitNumber}`;
+                radio.dataset.kit = kitNumber;
+                if (radio.value === 'raw') {
+                    radio.checked = true; // Default to raw dough
+                } else {
+                    radio.checked = false;
+                }
+            });
+            
+            // Update total element
+            const totalElement = newKit.querySelector('.kit-total');
+            totalElement.dataset.kit = kitNumber;
+            totalElement.textContent = '12.00';
+            
+            // Add remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = '🗑️ Remove Kit';
+            removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -3rem; position: relative; z-index: 10;';
+            removeBtn.addEventListener('click', function() {
+                newKit.remove();
+                updateOrderTotal();
+            });
+            
+            newKit.querySelector('.pizza-kit > div').appendChild(removeBtn);
+            kitsContainer.appendChild(newKit);
+            updateOrderTotal();
+        }
+
+        function submitOrder() {
+            // Validate required fields
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const pickupDate = document.getElementById('pickupDate').value;
+            const pickupTime = document.getElementById('pickupTime').value;
+
+            if (!name || !phone || !email || !pickupDate || !pickupTime) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Collect order data
+            const orderData = {
+                customer: {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    pickupDate: pickupDate,
+                    pickupTime: pickupTime,
+                    specialInstructions: document.getElementById('specialInstructions').value.trim()
+                },
+                kits: [],
+                total: document.getElementById('orderTotal').textContent
+            };
+
+            // Collect kit data
+            document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
+                const kitNumber = kit.dataset.kit;
+                const toppings = [];
+                const doughType = kit.querySelector(`input[name="dough-type-${kitNumber}"]:checked`).value;
+                
+                kit.querySelectorAll('.topping-checkbox:checked').forEach(checkbox => {
+                    toppings.push({
+                        name: checkbox.parentElement.textContent.trim(),
+                        price: parseFloat(checkbox.dataset.price)
+                    });
+                });
+
+                orderData.kits.push({
+                    kitNumber: parseInt(kitNumber),
+                    doughType: doughType,
+                    basePrice: 12.00,
+                    toppings: toppings,
+                    kitTotal: parseFloat(kit.querySelector('.kit-total').textContent)
+                });
+            });
+
+            // Show confirmation
+            showOrderConfirmation(orderData);
+        }
+
+        function showOrderConfirmation(orderData) {
+            const confirmationHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; text-align: center;">
+                        <h2 style="color: #2a9d8f; margin-bottom: 1rem;">🎉 Order Confirmed!</h2>
+                        <p style="margin-bottom: 1rem;"><strong>Order Total: ${orderData.total}</strong></p>
+                        <p style="margin-bottom: 1rem;">Pickup: ${orderData.customer.pickupDate} at ${orderData.customer.pickupTime}</p>
+                        <p style="margin-bottom: 2rem;">We'll send confirmation and pickup location to ${orderData.customer.email}</p>
+                        <button onclick="closeConfirmation()" style="background: #e76f51; color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', confirmationHTML);
+            
+            // In a real implementation, you'd send this data to your server
+            console.log('Order Data:', orderData);
+        }
+
+        // Add "Back to Home" functionality
+        window.backToHome = function() {
+            // Show all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'block';
+            });
+            // Remove any page content
+            const existingPage = document.querySelector('.page-content');
+            if (existingPage) {
+                existingPage.remove();
+            }
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        window.closeConfirmation = function() {
+            const confirmation = document.querySelector('[style*="position: fixed"]');
+            if (confirmation) {
+                confirmation.remove();
+            }
+        }
+    </script>
