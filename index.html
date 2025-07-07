@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinner's Done - Restaurant-Quality Pizza at Home</title>
+    <title>Pizza Kit Kitchen - Restaurant-Quality Pizza at Home</title>
     <meta name="description" content="Order fresh pizza kits with signature herb sauce. Ready to bake at home in 15 minutes. Local pickup 4-7 PM weekdays.">
     <style>
         * {
@@ -81,7 +81,18 @@
         }
 
         /* Hero Section */
-.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; overflow: hidden; } .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; } .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: -1; }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f4a261" width="1200" height="800"/><circle fill="%23e76f51" cx="600" cy="400" r="200"/><circle fill="%23e9c46a" cx="600" cy="400" r="150"/><circle fill="%23f4a261" cx="600" cy="400" r="100"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+
         .hero-content h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
@@ -402,7 +413,10 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#" class="logo"> <img src="path/to/pizza logo.png" alt="Dinner's Done Logo" style="height: 40px; margin-right: 10px; vertical-align: middle;"> Dinner's Done </a>
+            <a href="#" class="logo">
+    <img src="Images/pizza logo.png" alt="Dinner's Done Logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+    Dinner's Done
+</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
@@ -419,7 +433,18 @@
     </header>
 
     <!-- Hero Section -->
-<section id="home" class="hero"> <video autoplay muted loop class="hero-video"> <source src="images/hero/Pizza Video.mp4" type="video/mp4"> <source src="images/hero/ Pizza Video.webm" type="video/webm"> </video> <div class="hero-overlay"></div> <div class="hero-content"> <h1>Restaurant-Quality Pizza Kits<br>Ready in 15 Minutes at Home</h1> <!-- ... rest of content stays the same ... --> </div> </section>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Restaurant-Quality Pizza Kits<br>Ready in 15 Minutes at Home</h1>
+            <p>Fresh ingredients, signature herb sauce, and easy instructions.<br>Perfect for busy families!</p>
+            <a href="#order" class="cta-button">Order Your Kit Now</a>
+            <a href="#menu" class="btn-secondary">View Menu</a>
+            <div class="hero-info">
+                <p>📞 24-hour advance notice required • 🕐 Pickup 4-7 PM weekdays</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
@@ -530,7 +555,7 @@
                 <div class="contact-item">
                     <div class="contact-icon">📧</div>
                     <h3>Email</h3>
-                    <p>orders@Dinnersdone@gmail.com<br>We respond within 2 hours</p>
+                    <p>orders@pizzakitkitchen.com<br>We respond within 2 hours</p>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">🕐</div>
@@ -549,7 +574,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Diner's Done. Made with ❤️ for busy families.</p>
+            <p>&copy; 2025 Pizza Kit Kitchen. Made with ❤️ for busy families.</p>
             <p>🍕 Restaurant-quality ingredients • 🏠 Home convenience • 👨‍👩‍👧‍👦 Family fun</p>
         </div>
     </footer>
@@ -685,11 +710,11 @@
                 case 'about':
                     return `
                         <section class="container" style="padding: 4rem 0;">
-                            <h2 class="section-title">About Dinner's Done</h2>
+                            <h2 class="section-title">About Pizza Kit Kitchen</h2>
                             <div style="max-width: 800px; margin: 0 auto;">
                                 <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
                                     <h3>Our Story</h3>
-                                    <p>Diner's Done was born from a simple idea: busy families deserve restaurant-quality pizza without the hassle. As working parents ourselves, we understand the 5 PM panic of "what's for dinner?" Our signature herb sauce recipe has been perfected over years of family dinners, and now we're sharing it with our neighbors.</p>
+                                    <p>Pizza Kit Kitchen was born from a simple idea: busy families deserve restaurant-quality pizza without the hassle. As working parents ourselves, we understand the 5 PM panic of "what's for dinner?" Our signature herb sauce recipe has been perfected over years of family dinners, and now we're sharing it with our neighbors.</p>
                                 </div>
                                 <div style="background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                     <h3>The Secret Sauce</h3>
