@@ -1226,45 +1226,83 @@
             };
 
             // Collect kit data
-            document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
-                const kitNumber = kit.dataset.kit;
-                const toppings = [];
-                const doughType = kit.querySelector(`input[name="dough-type-${kitNumber}"]:checked`).value;
-                
-                kit.querySelectorAll('.topping-checkbox:checked').forEach(checkbox => {
-                    toppings.push({
-                        name: checkbox.parentElement.textContent.trim(),
-                        price: parseFloat(checkbox.dataset.price)
-                    });
-                });
+document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
+    const kitNumber = kit.dataset.kit;
+    const toppings = [];
+    
+    // CRITICAL FIX: Use the correct selector to get dough type for each specific kit
+    const doughTypeElement = kit.querySelector(`input[name="dough-type-${kitNumber}"]:checked`);
+    const doughType = doughTypeElement ? doughTypeElement.value : 'raw'; // fallback to raw
+    
+    kit.querySelectorAll('.topping-checkbox:checked').forEach(checkbox => {
+        toppings.push({
+            name: checkbox.parentElement.textContent.trim(),
+            price: parseFloat(checkbox.dataset.price)
+        });
+    });
 
-                orderData.kits.push({
-                    kitNumber: parseInt(kitNumber),
-                    doughType: doughType,
-                    basePrice: 12.00,
-                    toppings: toppings,
-                    kitTotal: parseFloat(kit.querySelector('.kit-total').textContent)
-                });
-            });
+    orderData.kits.push({
+        kitNumber: parseInt(kitNumber),
+        doughType: doughType,
+        basePrice: 45.00, // Fixed: was incorrectly 12.00
+        toppings: toppings,
+        kitTotal: parseFloat(kit.querySelector('.kit-total').textContent)
+    });
+});
 
             // Show confirmation
             showOrderConfirmation(orderData);
         }
 
-        function showOrderConfirmation(orderData) {
-            const confirmationHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; text-align: center;">
-                        <h2 style="color: #2a9d8f; margin-bottom: 1rem;">🎉 Order Confirmed!</h2>
-                        <p style="margin-bottom: 1rem;"><strong>Order Total: ${orderData.total}</strong></p>
-                        <p style="margin-bottom: 1rem;">Pickup: ${orderData.customer.pickupDate} at ${orderData.customer.pickupTime}</p>
-                        <p style="margin-bottom: 2rem;">We'll send confirmation and pickup location to ${orderData.customer.email}</p>
-                        <button onclick="closeConfirmation()" style="background: #e76f51; color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
-                            Close
-                        </button>
-                    </div>
+       function showOrderConfirmation(orderData) {
+    // Create detailed order summary
+    let kitDetails = '';
+    orderData.kits.forEach(kit => {
+        const doughTypeDisplay = kit.doughType === 'raw' ? 'Raw Dough (15 min)' : 'Par-Baked Crust (8 min)';
+        kitDetails += `
+            <div style="background: #f8f9fa; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; text-align: left;">
+                <strong>Kit #${kit.kitNumber}</strong><br>
+                <em>Dough Type: ${doughTypeDisplay}</em><br>
+                Base Kit: $45.00<br>
+                ${kit.toppings.length > 0 ? 
+                    'Toppings: ' + kit.toppings.map(t => `${t.name} (+$${t.price})`).join(', ') + '<br>' 
+                    : 'No additional toppings<br>'
+                }
+                <strong>Kit Total: $${kit.kitTotal.toFixed(2)}</strong>
+            </div>
+        `;
+    });
+    
+    const confirmationHTML = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center; overflow-y: auto;">
+            <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 600px; width: 90%; text-align: center; margin: 2rem 0; max-height: 90vh; overflow-y: auto;">
+                <h2 style="color: #2a9d8f; margin-bottom: 1rem;">🎉 Order Confirmed!</h2>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #264653; margin-bottom: 1rem;">Order Summary:</h3>
+                    ${kitDetails}
                 </div>
-            `;
+                
+                <div style="background: #264653; color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <strong>Total Order: $${orderData.total}</strong>
+                </div>
+                
+                <p style="margin-bottom: 1rem;"><strong>Customer:</strong> ${orderData.customer.name}</p>
+                <p style="margin-bottom: 1rem;"><strong>Pickup:</strong> ${orderData.customer.pickupDate} at ${orderData.customer.pickupTime}</p>
+                <p style="margin-bottom: 2rem;">We'll send confirmation and pickup location to <strong>${orderData.customer.email}</strong></p>
+                
+                <button onclick="closeConfirmation()" style="background: #e76f51; color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', confirmationHTML);
+    
+    // In a real implementation, you'd send this data to your server
+    console.log('Order Data:', orderData);
+}
             
             document.body.insertAdjacentHTML('beforeend', confirmationHTML);
             
