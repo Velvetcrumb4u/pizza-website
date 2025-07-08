@@ -423,7 +423,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
-               <li><a href="#order">Order</a></li>
+                <li><a href="#order">Order</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -440,11 +440,11 @@
         <div class="hero-content">
             <h1>Restaurant-Quality Pizza Kits<br>Ready in 15 Minutes at Home</h1>
             <p>Fresh ingredients, signature herb sauce, and easy instructions.<br>Perfect for busy families!</p>
-           <a href="#order" class="cta-button">Order Your Kit Now</a>
+            <a href="#order" class="cta-button">Order Your Kit Now</a>
             <a href="#menu" class="btn-secondary">View Menu</a>
          <div class="hero-info">
-    <p style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-size: 1.4rem; font-weight: bold;">
-        📱 24-hour advance notice required • ⏰ Pickup 4-7 PM weekdays • 12 noon - 8 PM Saturdays
+    <p style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-size: 1.1rem; font-weight: bold;">
+        📱 24-hour advance notice required • ⏰ Pickup 4-7 PM weekdays
     </p>
 </div>
     </p>
@@ -460,7 +460,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">🌿</div>
                     <h3>Signature Herb Sauce</h3>
-                    <p>Our secret blend of herbs and spices makes every pizza extraordinary. You can't get this flavour anywhere else!</p>
+                    <p>Our secret blend of herbs and spices makes every pizza extraordinary. You can't get this flavor anywhere else!</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🥬</div>
@@ -489,7 +489,7 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Order Online</h3>
-                    <p>Choose your pizza kits and toppings 24 hours in advance. Schedule your pickup time between 4-7 PM on weekdays; 12 noon- 8 PM, Saturdays.</p>
+                    <p>Choose your pizza kits and toppings 24 hours in advance. Schedule your pickup time between 4-7 PM on weekdays.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
@@ -516,7 +516,7 @@
 </div>
     <div class="menu-item-content">
         <h3>Base Kit</h3>
-       <p>Fresh dough, signature herb sauce, and premium mozarella cheese. Medium size (10-12 inches). The perfect foundation for your creation!</p>
+        <p>Fresh dough, signature herb sauce, and premium mozarella cheese. The perfect foundation for your creation!</p>
         <div class="price">$45.00</div>
     </div>
 </div>
@@ -524,7 +524,7 @@
                     <div class="menu-item-image">🍅🫑🍍</div>
                     <div class="menu-item-content">
                         <h3>Veggie Add-ons</h3>
-                        <p>Fresh tomatoes, sweet peppers, pineapple, olives, mushrooms or corn. Add color and flavour to your pizza!</p>
+                        <p>Fresh tomatoes, sweet peppers, pineapple, olives, mushrooms or corn. Add color and flavor to your pizza!</p>
                         <div class="price">+$10.00 each</div>
                     </div>
                 </div>
@@ -533,7 +533,7 @@
                     <div class="menu-item-content">
                         <h3>Deli Meats Toppings</h3>
                         <p>Turkey ham, ham, pepperoni or bacon. Classic favourites!</p>
-                        <div class="price">+$13.00 each</div>
+                        <div class="price">+$12.00 - $15.00 each</div>
                     </div>
                 </div>
                <div class="menu-item">
@@ -599,7 +599,7 @@
     <!-- Page Navigation -->
     <div class="page-nav" id="pageNav">
         <div class="nav-pages" id="navPages" style="display: none;">
-          <a href="#order">📝 Order Form</a>
+            <a href="#order">📝 Order Form</a>
             <a href="#about">ℹ️ About Us</a>
             <a href="#instructions">📋 Instructions</a>
             <a href="#contact">📞 Contact Info</a>
@@ -637,43 +637,42 @@
         // Smooth scrolling for anchor links (REMOVED - handled above)
 
         // Handle all page navigation links
-// Handle all page navigation links
-// Handle all page navigation links
-document.addEventListener('click', function(e) {
-    // Handle navigation links
-    if (e.target.matches('a[href^="#"]')) {
-        e.preventDefault();
-        const href = e.target.getAttribute('href');
-        const page = href.substring(1);
-        
-        // If it's a special page (order, about, instructions), show that page
-        if (['order', 'about', 'instructions'].includes(page)) {
-            showPage(page);
-            navPages.style.display = 'none';
-        } else {
-            // Otherwise, smooth scroll to section
-            const target = document.querySelector(href);
-            if (target) {
-                // Show all sections first (in case we're in a special page view)
-                document.querySelectorAll('section').forEach(section => {
-                    section.style.display = 'block';
-                });
-                // Remove any page content
-                const existingPage = document.querySelector('.page-content');
-                if (existingPage) {
-                    existingPage.remove();
+        document.addEventListener('click', function(e) {
+            // Handle navigation links
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const href = e.target.getAttribute('href');
+                const page = href.substring(1);
+                
+                // If it's a special page (order, about, instructions), show that page
+                if (['order', 'about', 'instructions'].includes(page)) {
+                    showPage(page);
+                    navPages.style.display = 'none';
+                } else {
+                    // Otherwise, smooth scroll to section
+                    const target = document.querySelector(href);
+                    if (target) {
+                        // Show all sections first (in case we're in a special page view)
+                        document.querySelectorAll('section').forEach(section => {
+                            section.style.display = 'block';
+                        });
+                        // Remove any page content
+                        const existingPage = document.querySelector('.page-content');
+                        if (existingPage) {
+                            existingPage.remove();
+                        }
+                        // Scroll to target
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
-                // Scroll to target
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
             }
-        }
-        // Close mobile menu if open
-        if (navLinks) navLinks.classList.remove('active');
-    }
-});
+        });
+
         function showPage(page) {
             // Hide all sections
             document.querySelectorAll('section').forEach(section => {
@@ -715,8 +714,8 @@ document.addEventListener('click', function(e) {
                             <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
                                 <h3>🕐 Important Ordering Information</h3>
                                 <p>• 24-hour advance notice required</p>
-                                <p>• Pickup available Monday-Friday 4-7 PM and;</p>
-                                <p>• Saturdays 12 Noon-8 PM</p>
+                                <p>• Pickup available Monday-Friday 4-7 PM</p>
+                                <p>• Pickup available Saturdays 12 Noon-8 PM</p>
                                 <p>• Payment: Cash on pickup</p>
                                 <p>• Pickup location provided after order confirmation</p>
                             </div>
@@ -923,9 +922,7 @@ document.addEventListener('click', function(e) {
                                             </label>
                                             <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
                                                 <p style="margin: 0; color: #666; font-size: 0.9rem;">
-    <strong>Includes:</strong> Your chosen dough + signature herb sauce + mozarella cheese<br>
-    <strong>Size:</strong> Medium (10-12 inches)
-</p>
+                                                    <strong>Includes:</strong> Your chosen dough + signature herb sauce + mozarella cheese
                                                 </p>
                                             </div>
                                         </div>
@@ -961,7 +958,7 @@ document.addEventListener('click', function(e) {
 
                                     <!-- Deli Meat Toppings -->
                                     <div style="margin-bottom: 1rem;">
-                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Deli Meat Toppings (+$13.00 each)</label>
+                                        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Deli Meat Toppings (+$12.50 each)</label>
                                         <div style="background: white; padding: 1rem; border-radius: 5px;">
                                             <label style="display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer;">
                                                 <input type="checkbox" class="topping-checkbox" data-price="13.00" data-kit="1" style="margin-right: 0.5rem;">
@@ -1028,7 +1025,7 @@ document.addEventListener('click', function(e) {
                         <div style="background: #264653; color: white; padding: 1.5rem; border-radius: 8px; text-align: center; margin-bottom: 2rem;">
                             <h3 style="margin-bottom: 0.5rem;">Order Total</h3>
                             <div style="font-size: 2rem; font-weight: bold;">
-                                $<span id="orderTotal">45.00</span>
+                                $<span id="orderTotal">12.00</span>
                             </div>
                         </div>
                     </div>
@@ -1055,26 +1052,16 @@ document.addEventListener('click', function(e) {
                             </div>
                             <div>
                                 <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Pickup Time *</label>
-                               <select id="pickupTime" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
-    <option value="">Select time</option>
-    <option value="12:00 PM">12:00 PM (Saturday only)</option>
-    <option value="12:30 PM">12:30 PM (Saturday only)</option>
-    <option value="1:00 PM">1:00 PM (Saturday only)</option>
-    <option value="1:30 PM">1:30 PM (Saturday only)</option>
-    <option value="2:00 PM">2:00 PM (Saturday only)</option>
-    <option value="2:30 PM">2:30 PM (Saturday only)</option>
-    <option value="3:00 PM">3:00 PM (Saturday only)</option>
-    <option value="3:30 PM">3:30 PM (Saturday only)</option>
-    <option value="4:00 PM">4:00 PM (Mon-Fri)</option>
-    <option value="4:30 PM">4:30 PM (Mon-Fri)</option>
-    <option value="5:00 PM">5:00 PM (Mon-Fri)</option>
-    <option value="5:30 PM">5:30 PM (Mon-Fri)</option>
-    <option value="6:00 PM">6:00 PM (Mon-Fri)</option>
-    <option value="6:30 PM">6:30 PM (Mon-Fri)</option>
-    <option value="7:00 PM">7:00 PM (Mon-Fri & Saturday)</option>
-    <option value="7:30 PM">7:30 PM (Saturday only)</option>
-    <option value="8:00 PM">8:00 PM (Saturday only)</option>
-</select>
+                                <select id="pickupTime" required style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem;">
+                                    <option value="">Select time</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="4:30 PM">4:30 PM</option>
+                                    <option value="5:00 PM">5:00 PM</option>
+                                    <option value="5:30 PM">5:30 PM</option>
+                                    <option value="6:00 PM">6:00 PM</option>
+                                    <option value="6:30 PM">6:30 PM</option>
+                                    <option value="7:00 PM">7:00 PM</option>
+                                </select>
                             </div>
                         </div>
                         <div style="margin-top: 1rem;">
@@ -1086,7 +1073,7 @@ document.addEventListener('click', function(e) {
                     <!-- Submit Button -->
                     <div style="text-align: center;">
                         <button id="submitOrder" style="background: linear-gradient(45deg, #e76f51, #f4a261); color: white; border: none; padding: 1.2rem 3rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                            Place Order - $<span id="submitTotal">45.00</span>
+                            Place Order - $<span id="submitTotal">12.00</span>
                         </button>
                         <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
                             You'll receive confirmation and pickup location via email
@@ -1153,53 +1140,80 @@ document.addEventListener('click', function(e) {
             document.getElementById('submitTotal').textContent = orderTotal.toFixed(2);
         }
 
-                 function addNewKit(kitNumber) {
-    const kitsContainer = document.getElementById('pizzaKits');
-    const newKit = document.querySelector('.pizza-kit').cloneNode(true);
-    
-    // Update kit number and data attributes
-    newKit.dataset.kit = kitNumber;
-    newKit.querySelector('h4').textContent = `Pizza Kit #${kitNumber}`;
-    
-    // Reset all checkboxes and update data-kit attributes
-    const checkboxes = newKit.querySelectorAll('.topping-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-        checkbox.dataset.kit = kitNumber;
-    });
-    
-    // Update radio button names and data-kit attributes
-    const radioButtons = newKit.querySelectorAll('.dough-radio');
-    radioButtons.forEach(radio => {
-        radio.name = `dough-type-${kitNumber}`;
-        radio.dataset.kit = kitNumber;
-        if (radio.value === 'raw') {
-            radio.checked = true;
-        } else {
-            radio.checked = false;
+        function addNewKit(kitNumber) {
+            const kitsContainer = document.getElementById('pizzaKits');
+            const newKit = document.querySelector('.pizza-kit').cloneNode(true);
+            
+            // Update kit number and data attributes
+            newKit.dataset.kit = kitNumber;
+            newKit.querySelector('h4').textContent = `Pizza Kit #${kitNumber}`;
+            
+            // Reset all checkboxes and update data-kit attributes
+            const checkboxes = newKit.querySelectorAll('.topping-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.dataset.kit = kitNumber;
+            });
+            
+            // Update radio button names and data-kit attributes
+            const radioButtons = newKit.querySelectorAll('.dough-radio');
+            radioButtons.forEach(radio => {
+                radio.name = `dough-type-${kitNumber}`;
+                radio.dataset.kit = kitNumber;
+                if (radio.value === 'raw') {
+                    radio.checked = true; // Default to raw dough
+                } else {
+                    radio.checked = false;
+                }
+            });
+            
+            // Update total element
+            const totalElement = newKit.querySelector('.kit-total');
+            totalElement.dataset.kit = kitNumber;
+            totalElement.textContent = '12.00';
+            
+            // Add remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = '🗑️ Remove Kit';
+            removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -3rem; position: relative; z-index: 10;';
+            removeBtn.addEventListener('click', function() {
+                newKit.remove();
+                updateOrderTotal();
+            });
+            
+            newKit.querySelector('.pizza-kit > div').appendChild(removeBtn);
+            kitsContainer.appendChild(newKit);
+            updateOrderTotal();
         }
-    });
-    
-    // Update total element
-    const totalElement = newKit.querySelector('.kit-total');
-    totalElement.dataset.kit = kitNumber;
-    totalElement.textContent = '45.00';
-    
-    // Add remove button
-    const removeBtn = document.createElement('button');
-    removeBtn.innerHTML = '🗑️ Remove Kit';
-    removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -3rem; position: relative; z-index: 10;';
-    removeBtn.addEventListener('click', function() {
-        newKit.remove();
-        updateOrderTotal();
-    });
-    
-    newKit.querySelector('.pizza-kit > div').appendChild(removeBtn);
-    kitsContainer.appendChild(newKit);
-    updateOrderTotal();
-}
-        
-                           // Collect kit data
+
+        function submitOrder() {
+            // Validate required fields
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const pickupDate = document.getElementById('pickupDate').value;
+            const pickupTime = document.getElementById('pickupTime').value;
+
+            if (!name || !phone || !email || !pickupDate || !pickupTime) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Collect order data
+            const orderData = {
+                customer: {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    pickupDate: pickupDate,
+                    pickupTime: pickupTime,
+                    specialInstructions: document.getElementById('specialInstructions').value.trim()
+                },
+                kits: [],
+                total: document.getElementById('orderTotal').textContent
+            };
+
+            // Collect kit data
             document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
                 const kitNumber = kit.dataset.kit;
                 const toppings = [];
