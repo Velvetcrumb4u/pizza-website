@@ -1118,7 +1118,7 @@
         function updateKitTotal(kitNumber) {
             const kit = document.querySelector(`[data-kit="${kitNumber}"]`);
             const checkboxes = kit.querySelectorAll('.topping-checkbox:checked');
-            let total = 12.00; // Base price
+            let total = 45.00; // Base price
 
             checkboxes.forEach(checkbox => {
                 total += parseFloat(checkbox.dataset.price);
