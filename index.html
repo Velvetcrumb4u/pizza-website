@@ -649,7 +649,7 @@ document.addEventListener('click', function(e) {
         // If it's a special page (order, about, instructions), show that page
         if (['order', 'about', 'instructions'].includes(page)) {
             showPage(page);
-            if (navPages) navPages.style.display = 'none';
+            navPages.style.display = 'none';
         } else {
             // Otherwise, smooth scroll to section
             const target = document.querySelector(href);
