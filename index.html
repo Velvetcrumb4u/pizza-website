@@ -1189,58 +1189,7 @@ document.addEventListener('click', function(e) {
     updateOrderTotal();
 }
             
-            // Reset all checkboxes and update data-kit attributes
-            const checkboxes = newKit.querySelectorAll('.topping-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-                checkbox.dataset.kit = kitNumber;
-            });
-            
-            // Update radio button names and data-kit attributes
-            const radioButtons = newKit.querySelectorAll('.dough-radio');
-            radioButtons.forEach(radio => {
-                radio.name = `dough-type-${kitNumber}`;
-                radio.dataset.kit = kitNumber;
-                if (radio.value === 'raw') {
-                    radio.checked = true; // Default to raw dough
-                } else {
-                    radio.checked = false;
-                }
-            });
-            
-            // Update total element
-            const totalElement = newKit.querySelector('.kit-total');
-            totalElement.dataset.kit = kitNumber;
-            totalElement.textContent = '45.00';
-            
-            // Add remove button
-            const removeBtn = document.createElement('button');
-            removeBtn.innerHTML = '🗑️ Remove Kit';
-            removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -3rem; position: relative; z-index: 10;';
-            removeBtn.addEventListener('click', function() {
-                newKit.remove();
-                updateOrderTotal();
-            });
-            
-            newKit.querySelector('.pizza-kit > div').appendChild(removeBtn);
-            kitsContainer.appendChild(newKit);
-            updateOrderTotal();
-        }
-
-        function submitOrder() {
-            // Validate required fields
-            const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('customerPhone').value.trim();
-            const email = document.getElementById('customerEmail').value.trim();
-            const pickupDate = document.getElementById('pickupDate').value;
-            const pickupTime = document.getElementById('pickupTime').value;
-
-            if (!name || !phone || !email || !pickupDate || !pickupTime) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            // Collect order data
+                       // Collect order data
             const orderData = {
                 customer: {
                     name: name,
