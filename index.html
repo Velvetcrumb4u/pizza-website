@@ -1141,31 +1141,43 @@
         }
 
         function addNewKit(kitNumber) {
-            const kitsContainer = document.getElementById('pizzaKits');
-            const newKit = document.querySelector('.pizza-kit').cloneNode(true);
-            
-            // Update kit number and data attributes
-            newKit.dataset.kit = kitNumber;
-            newKit.querySelector('h4').textContent = `Pizza Kit #${kitNumber}`;
-            
-            // Reset all checkboxes and update data-kit attributes
-            const checkboxes = newKit.querySelectorAll('.topping-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-                checkbox.dataset.kit = kitNumber;
-            });
-            
-            // Update radio button names and data-kit attributes
-            const radioButtons = newKit.querySelectorAll('.dough-radio');
-            radioButtons.forEach(radio => {
-                radio.name = `dough-type-${kitNumber}`;
-                radio.dataset.kit = kitNumber;
-                if (radio.value === 'raw') {
-                    radio.checked = true; // Default to raw dough
-                } else {
-                    radio.checked = false;
-                }
-            });
+    const kitsContainer = document.getElementById('pizzaKits');
+    const newKit = document.querySelector('.pizza-kit').cloneNode(true);
+    
+    // Update kit number and data attributes
+    newKit.dataset.kit = kitNumber;
+    newKit.querySelector('h4').textContent = `Pizza Kit #${kitNumber}`;
+    
+    // Reset all checkboxes and update data-kit attributes
+    const checkboxes = newKit.querySelectorAll('.topping-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+        checkbox.dataset.kit = kitNumber;
+    });
+    
+    // Update radio button names and data-kit attributes - CRITICAL FIX
+    const radioButtons = newKit.querySelectorAll('.dough-radio');
+    radioButtons.forEach((radio, index) => {
+        // Create unique name for each kit's radio group
+        radio.name = `dough-type-${kitNumber}`;
+        radio.dataset.kit = kitNumber;
+        
+        // Set unique IDs to avoid conflicts
+        radio.id = `dough-${radio.value}-${kitNumber}`;
+        
+        // Set default selection (raw dough)
+        if (radio.value === 'raw') {
+            radio.checked = true;
+        } else {
+            radio.checked = false;
+        }
+        
+        // Update the label's 'for' attribute to match the new ID
+        const label = radio.closest('label');
+        if (label) {
+            label.setAttribute('for', radio.id);
+        }
+    });
             
             // Update total element
             const totalElement = newKit.querySelector('.kit-total');
