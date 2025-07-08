@@ -637,41 +637,42 @@
         // Smooth scrolling for anchor links (REMOVED - handled above)
 
         // Handle all page navigation links
-        document.addEventListener('click', function(e) {
-            // Handle navigation links
-            if (e.target.matches('a[href^="#"]')) {
-                e.preventDefault();
-                const href = e.target.getAttribute('href');
-                const page = href.substring(1);
-                
-                // If it's a special page (order, about, instructions), show that page
-                if (['order', 'about', 'instructions'].includes(page)) {
-                    showPage(page);
-                    navPages.style.display = 'none';
-                } else {
-                    // Otherwise, smooth scroll to section
-                    const target = document.querySelector(href);
-                    if (target) {
-                        // Show all sections first (in case we're in a special page view)
-                        document.querySelectorAll('section').forEach(section => {
-                            section.style.display = 'block';
-                        });
-                        // Remove any page content
-                        const existingPage = document.querySelector('.page-content');
-                        if (existingPage) {
-                            existingPage.remove();
-                        }
-                        // Scroll to target
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+// Handle all page navigation links
+document.addEventListener('click', function(e) {
+    // Handle navigation links
+    if (e.target.matches('a[href^="#"]')) {
+        e.preventDefault();
+        const href = e.target.getAttribute('href');
+        const page = href.substring(1);
+        
+        // If it's a special page (order, about, instructions), show that page
+        if (['order', 'about', 'instructions'].includes(page)) {
+            showPage(page);
+            if (navPages) navPages.style.display = 'none';
+        } else {
+            // Otherwise, smooth scroll to section
+            const target = document.querySelector(href);
+            if (target) {
+                // Show all sections first (in case we're in a special page view)
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                // Remove any page content
+                const existingPage = document.querySelector('.page-content');
+                if (existingPage) {
+                    existingPage.remove();
                 }
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
+                // Scroll to target
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
-        });
+        }
+        // Close mobile menu if open
+        if (navLinks) navLinks.classList.remove('active');
+    }
+});
 
         function showPage(page) {
             // Hide all sections
