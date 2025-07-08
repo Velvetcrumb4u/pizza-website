@@ -1198,22 +1198,8 @@ document.addEventListener('click', function(e) {
     kitsContainer.appendChild(newKit);
     updateOrderTotal();
 }
-            
-                       // Collect order data
-            const orderData = {
-                customer: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    pickupDate: pickupDate,
-                    pickupTime: pickupTime,
-                    specialInstructions: document.getElementById('specialInstructions').value.trim()
-                },
-                kits: [],
-                total: document.getElementById('orderTotal').textContent
-            };
-
-            // Collect kit data
+        
+                           // Collect kit data
             document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
                 const kitNumber = kit.dataset.kit;
                 const toppings = [];
