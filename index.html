@@ -1240,25 +1240,38 @@ function addNewKit(kitNumber) {
             showOrderConfirmation(orderData);
         }
 
-        function showOrderConfirmation(orderData) {
-            const confirmationHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; text-align: center;">
-                        <h2 style="color: #2a9d8f; margin-bottom: 1rem;">🎉 Order Confirmed!</h2>
-                        <p style="margin-bottom: 1rem;"><strong>Order Total: ${orderData.total}</strong></p>
-                        <p style="margin-bottom: 1rem;">Pickup: ${orderData.customer.pickupDate} at ${orderData.customer.pickupTime}</p>
-                        <p style="margin-bottom: 2rem;">We'll send confirmation and pickup location to ${orderData.customer.email}</p>
-                        <button onclick="closeConfirmation()" style="background: #e76f51; color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', confirmationHTML);
-            
-            // In a real implementation, you'd send this data to your server
-            console.log('Order Data:', orderData);
+       function showOrderConfirmation(orderData) {
+    const kitSummaries = orderData.kits.map(kit => {
+        const toppingList = kit.toppings.map(t => `• ${t.name} ($${t.price.toFixed(2)})`).join('<br>');
+        return `
+            <div style="text-align: left; margin-bottom: 1rem;">
+                <strong>Pizza Kit #${kit.kitNumber}</strong><br>
+                Dough Type: <strong>${kit.doughType}</strong><br>
+                ${toppingList ? `Toppings:<br>${toppingList}` : 'No toppings selected'}
+                <br><strong>Subtotal: $${kit.kitTotal.toFixed(2)}</strong>
+            </div>
+        `;
+    }).join('');
+
+    const confirmationHTML = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; text-align: center;">
+                <h2 style="color: #2a9d8f; margin-bottom: 1rem;">🎉 Order Confirmed!</h2>
+                <p style="margin-bottom: 1rem;"><strong>Order Total: $${orderData.total}</strong></p>
+                <p style="margin-bottom: 1rem;">Pickup: ${orderData.customer.pickupDate} at ${orderData.customer.pickupTime}</p>
+                <div style="margin-bottom: 2rem; text-align: left;">${kitSummaries}</div>
+                <p style="margin-bottom: 2rem;">We'll send confirmation and pickup location to ${orderData.customer.email}</p>
+                <button onclick="closeConfirmation()" style="background: #e76f51; color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', confirmationHTML);
+
+    // For debugging
+    console.log('Order Data:', orderData);
         }
 
         // Add "Back to Home" functionality
