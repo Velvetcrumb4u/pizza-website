@@ -1155,17 +1155,19 @@
                 checkbox.dataset.kit = kitNumber;
             });
             
-            // Update radio button names and data-kit attributes
-            const radioButtons = newKit.querySelectorAll('.dough-radio');
-            radioButtons.forEach(radio => {
-                radio.name = `dough-type-${kitNumber}`;
-                radio.dataset.kit = kitNumber;
-                if (radio.value === 'raw') {
-                    radio.checked = true; // Default to raw dough
-                } else {
-                    radio.checked = false;
-                }
-            });
+           // Update radio button names and data-kit attributes
+const radioButtons = newKit.querySelectorAll('.dough-radio');
+radioButtons.forEach(radio => {
+    radio.name = `dough-type-${kitNumber}`;
+    radio.dataset.kit = kitNumber;
+    if (kitNumber === 2) {
+        // Kit #2 defaults to par-baked
+        radio.checked = radio.value === 'par-baked';
+    } else {
+        // All other kits default to raw
+        radio.checked = radio.value === 'raw';
+    }
+});
             
             // Update total element
             const totalElement = newKit.querySelector('.kit-total');
