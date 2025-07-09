@@ -1172,10 +1172,14 @@ radioButtons.forEach(radio => {
     }
 });
             
-            // Update total element
-            const totalElement = newKit.querySelector('.kit-total');
-            totalElement.dataset.kit = kitNumber;
-            totalElement.textContent = '45.00';
+           // Update total element and its label
+const totalElement = newKit.querySelector('.kit-total');
+totalElement.dataset.kit = kitNumber;
+totalElement.textContent = '45.00';
+
+// Update the "Kit #1 Total:" text to show correct kit number
+const totalLabel = newKit.querySelector('span').parentElement;
+totalLabel.innerHTML = totalLabel.innerHTML.replace(/Kit #\d+/, `Kit #${kitNumber}`);
             
             // Add remove button
             const removeBtn = document.createElement('button');
