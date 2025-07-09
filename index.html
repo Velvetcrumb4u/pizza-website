@@ -1186,9 +1186,9 @@ const totalLabel = newKit.querySelector('span').parentElement;
 totalLabel.innerHTML = totalLabel.innerHTML.replace(/Kit #\d+/, `Kit #${kitNumber}`);
             
             // Add remove button
-            const removeBtn = document.createElement('button');
-            removeBtn.innerHTML = '🗑️ Remove Kit';
-            removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -3rem; position: relative; z-index: 10;';
+const removeBtn = document.createElement('button');
+removeBtn.innerHTML = '🗑️ Remove Kit';
+removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; float: right; margin-top: -5rem; position: relative; z-index: 10; margin-bottom: 1rem;';
             removeBtn.addEventListener('click', function() {
                 newKit.remove();
                 updateOrderTotal();
