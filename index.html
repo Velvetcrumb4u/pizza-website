@@ -1466,9 +1466,7 @@ totalElement.textContent = '45.00';
 const totalText = newKit.querySelector('[style*="border-top: 2px solid #e76f51"] span');
 totalText.innerHTML = `Kit #${kitNumber} Total: $<span class="kit-total" data-kit="${kitNumber}">45.00</span>`;
 
-// Update the "Kit #1 Total:" text to show correct kit number
-const totalLabel = newKit.querySelector('span').parentElement;
-totalLabel.innerHTML = totalLabel.innerHTML.replace(/Kit #\d+/, `Kit #${kitNumber}`);
+// The total label is already updated in the previous line, so remove these 3 lines completely
             
             // Add remove button
 const removeBtn = document.createElement('button');
