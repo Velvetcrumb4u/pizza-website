@@ -1512,15 +1512,22 @@ removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padd
         total: document.getElementById('orderTotal').textContent
     };
 
-    // Collect kit data and build order details string
-    let orderDetailsText = "";
-    document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
-        const kitNumber = kit.dataset.kit;
-        const toppings = [];
-        const doughType = kit.querySelector(`input[name="dough-type-${kitNumber}"]:checked`).value;
-        
-        orderDetailsText += `\nPizza Kit #${kitNumber}:\n`;
-        orderDetailsText += `- Type: ${doughType.charAt(0).toUpperCase() + doughType.slice(1)} \n`;
+   // Collect kit data and build order details string
+let orderDetailsText = "";
+document.querySelectorAll('.pizza-kit').forEach((kit, index) => {
+    const kitNumber = kit.dataset.kit;
+    const toppings = [];
+    const doughType = kit.querySelector(`input[name="dough-type-${kitNumber}"]:checked`).value;
+    
+    orderDetailsText += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    orderDetailsText += `                           PIZZA KIT #${kitNumber}\n`;
+    orderDetailsText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    orderDetailsText += `🍕 Type: ${doughType.charAt(0).toUpperCase() + doughType.slice(1).replace('-', ' ')}\n`;
+    orderDetailsText += `💰 Base Price: $45.00\n\n`;
+    
+    if (kit.querySelectorAll('.topping-checkbox:checked').length > 0) {
+        orderDetailsText += `📝 SELECTED TOPPINGS:\n`;
+        orderDetailsText += `┌─────────────────────────────────────────────────────────────────┐\n`;
         
         kit.querySelectorAll('.topping-checkbox:checked').forEach(checkbox => {
             const toppingName = checkbox.parentElement.textContent.trim();
@@ -1529,7 +1536,19 @@ removeBtn.style.cssText = 'background: #dc3545; color: white; border: none; padd
                 name: toppingName,
                 price: toppingPrice
             });
-            orderDetailsText += `- ${toppingName} (+$${toppingPrice.toFixed(2)})\n`;
+            
+            // Format with padding for alignment
+            const paddedName = toppingName.padEnd(45, '.');
+            orderDetailsText += `│  ${paddedName} +$${toppingPrice.toFixed(2)}  │\n`;
+        });
+        
+        orderDetailsText += `└─────────────────────────────────────────────────────────────────┘\n\n`;
+    } else {
+        orderDetailsText += `📝 TOPPINGS: Base kit only (no additional toppings)\n\n`;
+    }
+
+    const kitTotal = parseFloat(kit.querySelector('.kit-total').textContent);
+    orderDetailsText += `🏷️  KIT #${kitNumber} SUBTOTAL: $${kitTotal.toFixed(2)}\n`;
         });
 
         const kitTotal = parseFloat(kit.querySelector('.kit-total').textContent);
