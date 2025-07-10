@@ -1374,11 +1374,11 @@
             tomorrow.setDate(tomorrow.getDate() + 1);
             document.getElementById('pickupDate').min = tomorrow.toISOString().split('T')[0];
 
-            // Add event listeners
+           // Add event listeners
             setupOrderFormListeners();
             // Automatically add Pizza Kit #2 with par-baked default
-kitCounter++;
-addNewKit(kitCounter);
+            addNewKit(2);
+            kitCounter = 2; // Update counter to match
         }
 function setupOrderFormListeners() {
 
